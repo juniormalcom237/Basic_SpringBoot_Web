@@ -10,7 +10,7 @@ public class testDataUtil {
     public static Author createTestAuthor() {
         return Author
                 .builder()
-                .id(1L)
+//                .id(1L)
                 .name("Junior Malcom")
                 .age(24)
                 .build();
@@ -32,26 +32,27 @@ public class testDataUtil {
                 .age(21)
                 .build();
     }
-    public static Book createTestBook() {
+    public static Book createTestBook(final Author author) {
         return Book.builder()
                 .isbn("987-1-2131-4567-1")
                 .title("The Shadow in the attic")
-                .authorId(1L)
+//                .authorId(1L)
+                .author(author)
                 .build();
     }
-
-    public static Book createTestBookB() {
-        return Book.builder()
-                .isbn("987-2-2131-4567-2")
-                .title("The Bow in the artantic")
-                .authorId(3L)
-                .build();
-    }
-    public static Book createTestBookC() {
-        return Book.builder()
-                .isbn("987-3-2131-4567-3")
-                .title("The Coding Practice")
-                .authorId(2L)
-                .build();
-    }
+//
+//    public static Book createTestBookB() {
+//        return Book.builder()
+//                .isbn("987-2-2131-4567-2")
+//                .title("The Bow in the artantic")
+////                .authorId(3L)
+//                .build();
+//    }
+//    public static Book createTestBookC() {
+//        return Book.builder()
+//                .isbn("987-3-2131-4567-3")
+//                .title("The Coding Practice")
+////                .authorId(2L)
+//                .build();
+//    }
 }
