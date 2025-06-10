@@ -1,4 +1,4 @@
-package com.christdev.database.dao.impl;
+package com.christdev.database.repository;
 
 
 import com.christdev.database.dao.AuthorDao;
