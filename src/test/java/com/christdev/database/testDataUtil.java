@@ -10,7 +10,6 @@ public class testDataUtil {
     public static Author createTestAuthor() {
         return Author
                 .builder()
-//                .id(1L)
                 .name("Junior Malcom")
                 .age(24)
                 .build();
@@ -19,7 +18,6 @@ public class testDataUtil {
     public static Author createTestAuthorB(){
         return Author
                 .builder()
-                .id(2L)
                 .name("Tasse Tchoumba")
                 .age(222)
                 .build();
@@ -27,7 +25,6 @@ public class testDataUtil {
     public static Author createTestAuthorC(){
         return Author
                 .builder()
-                .id(3L)
                 .name("Hervana Brenda")
                 .age(21)
                 .build();
@@ -36,10 +33,20 @@ public class testDataUtil {
         return Book.builder()
                 .isbn("987-1-2131-4567-1")
                 .title("The Shadow in the attic")
-//                .authorId(1L)
+
                 .author(author)
                 .build();
     }
+
+    public static Book createTestBookB(Author author) {
+        return Book.builder()
+                .isbn("987-2-2131-4567-2")
+                .title("Coding in practice")
+
+                .author(author)
+                .build();
+    }
+
 //
 //    public static Book createTestBookB() {
 //        return Book.builder()
@@ -48,11 +55,12 @@ public class testDataUtil {
 ////                .authorId(3L)
 //                .build();
 //    }
-//    public static Book createTestBookC() {
-//        return Book.builder()
-//                .isbn("987-3-2131-4567-3")
-//                .title("The Coding Practice")
-////                .authorId(2L)
-//                .build();
-//    }
+    public static Book createTestBookC( Author author) {
+        return Book.builder()
+                .isbn("987-3-2131-4567-3")
+                .title("The Coding Practice")
+//                .authorId(2L)
+                .author(author)
+                .build();
+    }
 }
