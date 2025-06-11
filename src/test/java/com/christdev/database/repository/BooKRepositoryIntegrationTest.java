@@ -45,62 +45,53 @@ public class BooKRepositoryIntegrationTest {
 
     }
 //
-//    @Test
-//    public void TestThatMultipleBookCanBeCreatedAndRetrieved() {
-//        Author author = testDataUtil.createTestAuthor();
-//        authorDao.createAuthor(author);
-//        Author author2 = testDataUtil.createTestAuthorB();
-//        authorDao.createAuthor(author2);
-//        Author author3 = testDataUtil.createTestAuthorC();
-//        authorDao.createAuthor(author3);
-//
-//
-//        Book book = testDataUtil.createTestBook();
-//        book.setAuthorId(author.getId());
-//        underTest.createBook(book);
-//        Book book2 = testDataUtil.createTestBookB();
-//        book2.setAuthorId(author2.getId());
-//        underTest.createBook(book2);
-//
-//        Book book3 = testDataUtil.createTestBookC();
-//        book3.setAuthorId(author3.getId());
-//        underTest.createBook(book3);
-//
-//        List<Book> result = underTest.findMany();
-//
-//        assertThat(result).hasSize(3);
-//    }
-//
-//    @Test
-//    public void TestThatBookCanBeUpdatedAndRetrieved() {
-//        Author author = testDataUtil.createTestAuthor();
-//
-//        authorDao.createAuthor(author);
-//        Book book = testDataUtil.createTestBook();
-//
-//        book.setAuthorId(author.getId());
-//        underTest.createBook(book);
-//        book.setTitle("Clean code");
-//        underTest.update(book.getIsbn(), book);
-//        Optional<Book> result = underTest.findOne(book.getIsbn());
-//
-//        assertThat(result).isPresent();
-//        assertThat(result.get()).isEqualTo(book);
-//
-//    }
-//    @Test
-//    public void TestThatBookCanBeDeleted() {
-//        Book book = testDataUtil.createTestBook();
-//        Author author = testDataUtil.createTestAuthor();
-//        authorDao.createAuthor(author);
-//        book.setAuthorId(author.getId());
-//        underTest.createBook(book);
-//
-//        underTest.delete(book.getIsbn());
-//        Optional<Book> result = underTest.findOne(book.getIsbn());
-//
-//        assertThat(result).isNotPresent();
-//    }
+    @Test
+    public void TestThatMultipleBookCanBeCreatedAndRetrieved() {
+        Author author = testDataUtil.createTestAuthor();
+        Book book = testDataUtil.createTestBook(author);
+        Author author2 = testDataUtil.createTestAuthorB();
+        Book book2 = testDataUtil.createTestBookB(author2);
+        Author author3 = testDataUtil.createTestAuthorC();
+        underTest.save(book);
+
+        underTest.save(book2);
+
+        Book book3 = testDataUtil.createTestBookC(author3);
+
+        underTest.save(book3);
+        Iterable<Book> result = underTest.findAll();
+
+        assertThat(result).hasSize(3);
+    }
+
+    @Test
+    public void TestThatBookCanBeUpdatedAndRetrieved() {
+        Author author = testDataUtil.createTestAuthor();
+        Book book = testDataUtil.createTestBook(author);
+
+        book.setAuthor(author);
+        book.setTitle("Clean code");
+        underTest.save(book);
+        Optional<Book> result = underTest.findById(book.getIsbn());
+        book.setAuthor(result.get().getAuthor());
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(book);
+
+    }
+    @Test
+    public void TestThatBookCanBeDeleted() {
+
+        Author author = testDataUtil.createTestAuthor();
+        Book book = testDataUtil.createTestBook(author);
+        underTest.save(book);
+
+        underTest.delete(book);
+        Optional<Book> result = underTest.findById(book.getIsbn());
+
+        assertThat(result).isNotPresent();
+    }
+
+
 
 
 }
